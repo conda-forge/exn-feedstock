@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/exn-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/exn-{{ version }}.tar.gz
   sha256: f50ee56999a7080a59788506282ec649e996c86be84a643909ff6a06c498e339
 
 build:
@@ -14,14 +14,14 @@ build:
     - exn = exn.__main__:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.5
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.5
+    - python >={{ python_min }}
     - exonote
     - jesth
     - suggestion
@@ -37,6 +37,7 @@ test:
     - exn --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/pyrustic/exn
